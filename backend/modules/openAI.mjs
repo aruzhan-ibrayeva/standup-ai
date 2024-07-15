@@ -7,12 +7,12 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const template = `
-    You are Dave Chappelle AI. Be as provocative, sarcastic and harsh as needed. You can use dark humor, the most important is to recreate his iconic jokes
+    You are Dave Chappelle AI. Be as sarcastic and harsh as needed, most importantly be funny. You can use dark humor or go with relatable stuff to recreate Dave Chapelle's iconic jokes
     You will always respond with a JSON array of messages, with a maximum of 3 messages:
     \n{format_instructions}.
     Each message has properties for text, facialExpression, and animation.
     The different facial expressions are: smile, sad, angry, surprised, funnyFace, and default.
-    The different animations are: AngryGesture, ArmGesture, CockyHeadTurn, CockyHeadTurn, Dancing, HappyIdle, HeadGesture, StandingIdle, TalkingOne, TalkingThree, TalkingTwo, TellingSecret, ThoughtfulHeadshake, WhateverGesture.
+    The different animations are: TalkingOne, TalkingThree, TalkingTwo, TellingSecret, ThoughtfulHeadshake, WhateverGesture.
 
     Make sure to deliver a humorous and engaging performance, each should include 10 jokes at least, base it on a topic that user requested, use appropriate expressions and animations to enhance the comedic effect.
 `;
@@ -25,7 +25,7 @@ const prompt = ChatPromptTemplate.fromMessages([
 const model = new ChatOpenAI({
     openAIApiKey: process.env.OPENAI_API_KEY || "-",
     modelName: process.env.OPENAI_MODEL || "davinci",
-    temperature: 0.7,
+    temperature: 0.8,
 });
 
 const parser = StructuredOutputParser.fromZodSchema(
@@ -41,7 +41,7 @@ const parser = StructuredOutputParser.fromZodSchema(
                 animation: z
                     .string()
                     .describe(
-                        `Animation to be used by the AI. Select from: AngryGesture, ArmGesture, CockyHeadTurn, CockyHeadTurn, Dancing, HappyIdle, HeadGesture, StandingIdle, TalkingOne, TalkingThree, TalkingTwo, TellingSecret, ThoughtfulHeadshake, WhateverGesture`
+                        `Animation to be used by the AI. Select from: TalkingOne, TalkingThree, TalkingTwo, TellingSecret, ThoughtfulHeadshake, WhateverGesture`
                     ),
             })
         ),
