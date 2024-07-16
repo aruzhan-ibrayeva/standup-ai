@@ -37,8 +37,8 @@ const facialExpressions = {
     surprised: {
         eyeWideLeft: 0.5,
         eyeWideRight: 0.5,
-        jawOpen: 0,
-        mouthFunnel: 0.2,
+        jawOpen: 0.351,
+        mouthFunnel: 1,
         browInnerUp: 1,
     },
     angry: {
@@ -78,5 +78,6 @@ const facialExpressions = {
         tongueOut: 0.9618479575523053,
     },
 };
+
 
 export default facialExpressions;

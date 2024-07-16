@@ -11,7 +11,7 @@ function App() {
             <Loader />
             <ChatInterface />
             <ErrorBoundary>
-            <Canvas shadows camera={{ position: [0, 0, -10], fov: 30 }}>
+            <Canvas shadows camera={{ position: [0,0,-10], fov: 17 }}>
                 <Scenario />
             </Canvas>
             </ErrorBoundary>

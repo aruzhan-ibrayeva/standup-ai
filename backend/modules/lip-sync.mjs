@@ -8,27 +8,34 @@ const RETRY_DELAY = 0;
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const lipSync = async ({ messages }) => {
-    await Promise.all(
-        messages.map(async (message, index) => {
-            const fileName = `audios/message_${index}.mp3`;
-
-            for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-                try {
-                    await convertTextToSpeech({ text: message.text, fileName });
-                    await delay(RETRY_DELAY);
-                    break;
-                } catch (error) {
-                    if (error.response && error.response.status === 429 && attempt < MAX_RETRIES - 1) {
+    console.log(messages)
+    if (!messages){
+        return [];
+    }
+    try{
+        await Promise.all(
+            messages.map(async (message, index) => {
+                const fileName = `audios/message_${index}.mp3`;
+    
+                for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+                    try {
+                        await convertTextToSpeech({ text: message.text, fileName });
                         await delay(RETRY_DELAY);
-                    } else {
-                        throw error;
+                        break;
+                    } catch (error) {
+                        if (error.response && error.response.status === 429 && attempt < MAX_RETRIES - 1) {
+                            await delay(RETRY_DELAY);
+                        } else {
+                            throw error;
+                        }
                     }
                 }
-            }
-            console.log(`Message ${index} converted to speech`);
-        })
-    );
-
+                console.log(`Message ${index} converted to speech`);
+            })
+        );
+    }catch(err){
+        console.log("Internal server error")
+    }
     await Promise.all(
         messages.map(async (message, index) => {
             const fileName = `audios/message_${index}.mp3`;
