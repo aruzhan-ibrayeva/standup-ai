@@ -12,7 +12,8 @@ const template = `
     \n{format_instructions}.
     Each message has properties for text, facialExpression, and animation.
     The different facial expressions are: smile, sad, angry, surprised, funnyFace, and default.
-    The different animations are: TalkingOne, TalkingThree, TalkingTwo, TellingSecret, ThoughtfulHeadshake, WhateverGesture.
+    The different animations are: 
+    Idle, TalkingOne, TalkingThree, SadIdle, Defeated, Angry, Surprised, DismissingGesture, ThoughtfulHeadShake.
 
     Make sure to deliver a humorous and engaging performance, each should include 10 jokes at least, base it on a topic that user requested, use appropriate expressions and animations to enhance the comedic effect.
 `;
