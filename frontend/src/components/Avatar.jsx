@@ -14,6 +14,7 @@ export function Avatar(props) {
     const { message, onMessagePlayed } = useSpeech();
     const [lipsync, setLipsync] = useState();
     const [setupMode, setSetupMode] = useState(false);
+    const [showControls, setShowControls] = useState(false); 
 
     useEffect(() => {
         if (!message) {
@@ -172,6 +173,7 @@ export function Avatar(props) {
     }, []);
 
     return (
+        
         <group ref={group} {...props} dispose={null}>
             <primitive object={nodes.Hips} />
             <skinnedMesh
