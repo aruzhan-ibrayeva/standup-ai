@@ -1,5 +1,9 @@
 import { execCommand } from "../utils/files.mjs";
-import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const getPhonemes = async ({ message }) => {
     try {
@@ -11,9 +15,9 @@ const getPhonemes = async ({ message }) => {
         });
         console.log(`Conversion done in ${new Date().getTime() - time}ms`);
 
-        const rhubarbPath = path.join(__dirname, 'bin', process.platform === 'rhubarb');
-        const audioFilePath = path.join(__dirname, 'audios', `message_${message}.wav`);
-        const outputFilePath = path.join(__dirname, 'audios', `message_${message}.json`);
+        const rhubarbPath = 'rhubarb'; // Ensure 'rhubarb' is in your PATH
+        const audioFilePath = join(__dirname, '../audios', `message_${message}.wav`);
+        const outputFilePath = join(__dirname, '../audios', `message_${message}.json`);
 
         await execCommand({
             command: `${rhubarbPath} -f json -o ${outputFilePath} ${audioFilePath} -r phonetic`

@@ -1,0 +1,40 @@
+{
+  "metadata": {
+    "soundFile": "D:\\ARUZHAN\\NFACTORIAL24\\talking-avatar-with-ai\\apps\\backend\\audios\\message_1.wav",
+    "duration": 4.31
+  },
+  "mouthCues": [
+    { "start": 0.00, "end": 0.17, "value": "X" },
+    { "start": 0.17, "end": 0.21, "value": "B" },
+    { "start": 0.21, "end": 0.32, "value": "F" },
+    { "start": 0.32, "end": 0.39, "value": "E" },
+    { "start": 0.39, "end": 0.46, "value": "H" },
+    { "start": 0.46, "end": 0.53, "value": "C" },
+    { "start": 0.53, "end": 0.81, "value": "B" },
+    { "start": 0.81, "end": 0.88, "value": "G" },
+    { "start": 0.88, "end": 1.02, "value": "A" },
+    { "start": 1.02, "end": 1.24, "value": "B" },
+    { "start": 1.24, "end": 1.32, "value": "A" },
+    { "start": 1.32, "end": 1.51, "value": "C" },
+    { "start": 1.51, "end": 1.72, "value": "B" },
+    { "start": 1.72, "end": 1.79, "value": "G" },
+    { "start": 1.79, "end": 1.93, "value": "E" },
+    { "start": 1.93, "end": 2.14, "value": "B" },
+    { "start": 2.14, "end": 2.21, "value": "C" },
+    { "start": 2.21, "end": 2.35, "value": "E" },
+    { "start": 2.35, "end": 2.42, "value": "G" },
+    { "start": 2.42, "end": 2.49, "value": "B" },
+    { "start": 2.49, "end": 2.56, "value": "E" },
+    { "start": 2.56, "end": 2.64, "value": "A" },
+    { "start": 2.64, "end": 2.77, "value": "F" },
+    { "start": 2.77, "end": 2.84, "value": "B" },
+    { "start": 2.84, "end": 3.08, "value": "X" },
+    { "start": 3.08, "end": 3.16, "value": "B" },
+    { "start": 3.16, "end": 3.23, "value": "F" },
+    { "start": 3.23, "end": 3.30, "value": "C" },
+    { "start": 3.30, "end": 3.72, "value": "B" },
+    { "start": 3.72, "end": 4.07, "value": "F" },
+    { "start": 4.07, "end": 4.14, "value": "B" },
+    { "start": 4.14, "end": 4.31, "value": "X" }
+  ]
+}
