@@ -10,7 +10,7 @@ import morphTargets from "../constants/morphTargets";
 
 export function Avatar(props) {
     const { nodes, materials, scene } = useGLTF("/models/avatar.glb");
-    const { animations } = useGLTF("/models/animations.glb");
+    const { animations } = useGLTF("/models/please.glb");
     const { message, onMessagePlayed } = useSpeech();
     const [lipsync, setLipsync] = useState();
     const [setupMode, setSetupMode] = useState(false);
@@ -18,7 +18,7 @@ export function Avatar(props) {
 
     useEffect(() => {
         if (!message) {
-            setAnimation("Idle");
+            setAnimation("StandingIdle");
             return;
         }
         setAnimation(message.animation);
@@ -32,7 +32,7 @@ export function Avatar(props) {
 
     const group = useRef();
     const { actions, mixer } = useAnimations(animations, group);
-    const [animation, setAnimation] = useState(animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name);
+    const [animation, setAnimation] = useState(animations.find((a) => a.name === "StandingIdle") ? "StandingIdle" : animations[0].name);
 
     useEffect(() => {
         if (actions[animation]) {
@@ -50,7 +50,7 @@ export function Avatar(props) {
             console.warn(`Animation not found: ${animation}`);
         }
     }, [animation]);
-    
+
 
     const lerpMorphTarget = (target, value, speed = 0.1) => {
         scene.traverse((child) => {
