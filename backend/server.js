@@ -57,5 +57,5 @@ app.post("/sts", async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Dave Chappelle is listening to you on port ${port}`);
+    console.log(`Server is listening to you on port ${port}`);
 });

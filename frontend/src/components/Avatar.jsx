@@ -50,6 +50,7 @@ export function Avatar(props) {
             console.warn(`Animation not found: ${animation}`);
         }
     }, [animation]);
+    
 
     const lerpMorphTarget = (target, value, speed = 0.1) => {
         scene.traverse((child) => {

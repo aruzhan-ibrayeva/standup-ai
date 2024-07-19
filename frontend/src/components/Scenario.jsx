@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { Avatar } from "./Avatar";
 
 export const Scenario = () => {
-    const texture = useTexture("textures/comedy.jpg");
+    const texture = useTexture("textures/nomic.jpg");
     const viewport = useThree((state) => state.viewport);
 
     const cameraControls = useRef();
@@ -15,7 +15,7 @@ export const Scenario = () => {
     return (
         <>
             <CameraControls ref={cameraControls} />
-            <Avatar position={[0, 1.6, -1]} />
+            <Avatar position={[0, 1.6, 1.4]} />
             <Environment preset="sunset" />
             <mesh position={[0, 2.5, -7]}>
                 <planeGeometry args={[viewport.width*1.7, viewport.height*1.7]} />

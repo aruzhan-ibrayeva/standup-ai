@@ -17,14 +17,13 @@ export const ChatInterface = ({ hidden, ...props }) => {
     }
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-4 flex-col pointer-events-none">
-            <div className="self-start backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg">
-                <h1 className="font-black text-xl text-gray-700">Dave Chappelle's Online Laugh Lounge!</h1>
-                <p className="text-gray-600">
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
+            <div className="self-end flex flex-col items-end backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto mr-4 w-1/3">
+                <h1 className="font-black text-xl text-gray-700">Dave Chappelle's Laugh Lounge!</h1>
+                <p className="text-gray-700">
                     {loading ? "Loading..." : "Need a laugh? Give me a topic! Just a heads up, my humor can be brutally honest or deliciously dark!"}
                 </p>
             </div>
-            <div className="w-full flex flex-col items-end justify-center gap-4"></div>
             <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">
                 <button
                     onClick={recording ? stopRecording : startRecording}
