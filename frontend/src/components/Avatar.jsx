@@ -14,7 +14,7 @@ export function Avatar(props) {
     const { message, onMessagePlayed } = useSpeech();
     const [lipsync, setLipsync] = useState();
     const [setupMode, setSetupMode] = useState(false);
-    const [showControls, setShowControls] = useState(false); 
+    const [showControls, setShowControls] = useState(false);
 
     useEffect(() => {
         if (!message) {
@@ -106,57 +106,59 @@ export function Avatar(props) {
             });
         }
     });
-
-    useControls("FacialExpressions", {
-        animation: {
-            value: animation,
-            options: animations.map((a) => a.name),
-            onChange: (value) => setAnimation(value),
-        },
-        facialExpression: {
-            options: Object.keys(facialExpressions),
-            onChange: (value) => setFacialExpression(value),
-        },
-        setupMode: button(() => {
-            setSetupMode(!setupMode);
-        }),
-        logMorphTargetValues: button(() => {
-            const emotionValues = {};
-            Object.values(nodes).forEach((node) => {
-                if (node.morphTargetInfluences && node.morphTargetDictionary) {
-                    morphTargets.forEach((key) => {
-                        if (key === "eyeBlinkLeft" || key === "eyeBlinkRight") {
-                            return;
-                        }
-                        const value = node.morphTargetInfluences[node.morphTargetDictionary[key]];
-                        if (value > 0.01) {
-                            emotionValues[key] = value;
-                        }
-                    });
-                }
-            });
-            console.log(JSON.stringify(emotionValues, null, 2));
-        }),
-    });
-
-    useControls("MorphTarget", () =>
-        Object.assign(
-            {},
-            ...morphTargets.map((key) => {
-                return {
-                    [key]: {
-                        label: key,
-                        value: 0,
-                        min: 0,
-                        max: 1,
-                        onChange: (val) => {
-                            lerpMorphTarget(key, val, 0.1);
+    if (showControls) {
+        useControls("FacialExpressions", {
+            animation: {
+                value: animation,
+                options: animations.map((a) => a.name),
+                onChange: (value) => setAnimation(value),
+            },
+            facialExpression: {
+                options: Object.keys(facialExpressions),
+                onChange: (value) => setFacialExpression(value),
+            },
+            setupMode: button(() => {
+                setSetupMode(!setupMode);
+            }),
+            logMorphTargetValues: button(() => {
+                const emotionValues = {};
+                Object.values(nodes).forEach((node) => {
+                    if (node.morphTargetInfluences && node.morphTargetDictionary) {
+                        morphTargets.forEach((key) => {
+                            if (key === "eyeBlinkLeft" || key === "eyeBlinkRight") {
+                                return;
+                            }
+                            const value = node.morphTargetInfluences[node.morphTargetDictionary[key]];
+                            if (value > 0.01) {
+                                emotionValues[key] = value;
+                            }
+                        });
+                    }
+                });
+                console.log(JSON.stringify(emotionValues, null, 2));
+            }),
+        })
+    };
+    if (showControls) {
+        useControls("MorphTarget", () =>
+            Object.assign(
+                {},
+                ...morphTargets.map((key) => {
+                    return {
+                        [key]: {
+                            label: key,
+                            value: 0,
+                            min: 0,
+                            max: 1,
+                            onChange: (val) => {
+                                lerpMorphTarget(key, val, 0.1);
+                            },
                         },
-                    },
-                };
-            })
-        )
-    );
+                    };
+                })
+            )
+        );
+    }
 
     useEffect(() => {
         let blinkTimeout;
@@ -174,7 +176,7 @@ export function Avatar(props) {
     }, []);
 
     return (
-        
+
         <group ref={group} {...props} dispose={null}>
             <primitive object={nodes.Hips} />
             <skinnedMesh

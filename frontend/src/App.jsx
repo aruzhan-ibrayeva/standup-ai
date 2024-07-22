@@ -11,9 +11,17 @@ function App() {
             <Loader />
             <ChatInterface />
             <ErrorBoundary>
-            <Canvas shadows camera={{ position: [0,0,-10], fov: 17 }}>
-                <Scenario />
-            </Canvas>
+                <Canvas
+                    shadows
+                    camera={{ position: [0, 0, -10], fov: 17 }}
+                    onCreated={({ camera }) => {
+                        camera.lookAt(0, 0, 0);
+                        camera.updateProjectionMatrix();
+                    }}
+                    style={{ pointerEvents: 'none' }}
+                >
+                    <Scenario />
+                </Canvas>
             </ErrorBoundary>
         </>
     );

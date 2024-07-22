@@ -15,7 +15,7 @@ const template = `
     The different animations are: 
     StandingIdle, HeadTurn, Cocky, TalkingOne, TalkingTwo, TalkingThree, SadIdle, Defeated, Angry, Surprised, DismissingGesture, ThoughtfulHeadShake.
     Cocky and HeadTurn are more like the default gestures, you can use them frequently.
-    Make sure to deliver a humorous and engaging performance, based on a topic that user requested, using as many different animations as possible to enhance the comedic effect (not just Talking but use others too).
+    Make sure to deliver a humorous and engaging performance, based on a topic that user requested, using as many different animations as possible, make sure that same animations are not being repeatedly used in a row. to enhance the comedic effect (not just Talking but use others too).
 `;
 
 const prompt = ChatPromptTemplate.fromMessages([
