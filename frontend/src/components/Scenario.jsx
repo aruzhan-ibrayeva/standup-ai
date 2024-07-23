@@ -1,10 +1,12 @@
 import { CameraControls, Environment, useTexture } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
-import { Avatar } from "./Avatar";
+import { DaveChapelle } from "./DaveChapelle";
+import { Kharlamov } from "./Kharlamov";
+import { Saburov } from "./Saburov";
 
 export const Scenario = () => {
-    const texture = useTexture("textures/nomic.jpg");
+    const texture = useTexture("textures/minimalist.jpg");
     const viewport = useThree((state) => state.viewport);
 
     const cameraControls = useRef();
@@ -15,7 +17,7 @@ export const Scenario = () => {
     return (
         <>
             <CameraControls ref={cameraControls} />
-            <Avatar position={[0, 1.6, 1.4]} />
+            <Kharlamov position={[0, 1.4, -1]} />
             <Environment preset="sunset" />
             <mesh position={[0, 2.5, -7]}>
                 <planeGeometry args={[viewport.width*1.7, viewport.height*1.7]} />
