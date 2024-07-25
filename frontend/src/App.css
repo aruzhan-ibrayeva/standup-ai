@@ -1,0 +1,49 @@
+.app-container {
+    display: flex;
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.sidebar {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px; /* Adjust the width */
+}
+
+.thumbnail img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    border: 2px solid #fff;
+    transition: border 0.3s;
+}
+
+.thumbnail p {
+    color: white;
+    font-size: 14px;
+    text-align: center;
+}
+
+.thumbnail:hover img {
+    border: 2px solid #00f;
+}
+
+.canvas-container {
+    flex-grow: 1;
+    position: relative;
+}
