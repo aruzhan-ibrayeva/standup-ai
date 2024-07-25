@@ -10,6 +10,7 @@ export const SpeechProvider = ({ children }) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState();
     const [loading, setLoading] = useState(false);
+    const [comedian, setComedian] = useState("Saburov"); // default comedian
 
     let chunks = [];
 
@@ -28,12 +29,13 @@ export const SpeechProvider = ({ children }) => {
             const base64Audio = reader.result.split(",")[1];
             setLoading(true);
             try {
+                console.log("Sending STS request with comedian:", comedian); // Debug log
                 const data = await fetch(`${backendUrl}/sts`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ audio: base64Audio }),
+                    body: JSON.stringify({ audio: base64Audio, comedian }),
                 });
                 const response = (await data.json()).messages;
                 setMessages((messages) => [...messages, ...response]);
@@ -85,12 +87,13 @@ export const SpeechProvider = ({ children }) => {
     const tts = async (message) => {
         setLoading(true);
         try {
+            console.log("Sending TTS request with comedian:", comedian); // Debug log
             const data = await fetch(`${backendUrl}/tts`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({ message, comedian }),
             });
             const response = (await data.json()).messages;
             setMessages((messages) => [...messages, ...response]);
@@ -123,6 +126,7 @@ export const SpeechProvider = ({ children }) => {
                 message,
                 onMessagePlayed,
                 loading,
+                setComedian, 
             }}
         >
             {children}

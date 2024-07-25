@@ -3,23 +3,22 @@ import { getPhonemes } from "./rhubarbLipSync.mjs";
 import { readJsonTranscript, audioFileToBase64 } from "../utils/files.mjs";
 
 const MAX_RETRIES = 10;
-const RETRY_DELAY = 0;
+const RETRY_DELAY = 1000;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const lipSync = async ({ messages }) => {
-    console.log(messages)
-    if (!messages){
+const lipSync = async ({ messages, comedian }) => {
+    if (!messages) {
         return [];
     }
-    try{
+    try {
         await Promise.all(
             messages.map(async (message, index) => {
                 const fileName = `audios/message_${index}.mp3`;
-    
+
                 for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
                     try {
-                        await convertTextToSpeech({ text: message.text, fileName });
+                        await convertTextToSpeech({ text: message.text, fileName, comedian });
                         await delay(RETRY_DELAY);
                         break;
                     } catch (error) {
@@ -33,9 +32,10 @@ const lipSync = async ({ messages }) => {
                 console.log(`Message ${index} converted to speech`);
             })
         );
-    }catch(err){
-        console.log("Internal server error")
+    } catch (err) {
+        console.error("Internal server error", err);
     }
+
     await Promise.all(
         messages.map(async (message, index) => {
             const fileName = `audios/message_${index}.mp3`;

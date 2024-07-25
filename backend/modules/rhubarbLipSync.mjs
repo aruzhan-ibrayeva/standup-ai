@@ -15,7 +15,7 @@ const getPhonemes = async ({ message }) => {
         });
         console.log(`Conversion done in ${new Date().getTime() - time}ms`);
 
-        const rhubarbPath = 'rhubarb'; // Ensure 'rhubarb' is in your PATH
+        const rhubarbPath = 'rhubarb';
         const audioFilePath = join(__dirname, '../audios', `message_${message}.wav`);
         const outputFilePath = join(__dirname, '../audios', `message_${message}.json`);
 

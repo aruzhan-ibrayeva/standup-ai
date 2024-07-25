@@ -5,45 +5,48 @@ import { Leva } from "leva";
 import { Scenario } from "./components/Scenario";
 import { ChatInterface } from "./components/ChatInterface";
 import ErrorBoundary from "./ErrorBoundary";
-import './App.css'; 
+import './App.css';
+import { SpeechProvider } from "./hooks/useSpeech";
 
 function App() {
     const [selectedComedian, setSelectedComedian] = useState("DaveChapelle");
 
     return (
-        <div className="app-container">
-            <Loader />
-            <ChatInterface />
-            <ErrorBoundary>
-                <div className="sidebar">
-                    <div className="thumbnail" onClick={() => setSelectedComedian("DaveChapelle")}>
-                        <img src="/davechapelle-thumbnail.jpg" alt="Dave Chapelle" />
-                        <p>Dave Chappelle</p>
+        <SpeechProvider>
+            <div className="app-container">
+                <Loader />
+                <ChatInterface />
+                <ErrorBoundary>
+                    <div className="sidebar">
+                        <div className="thumbnail" onClick={() => setSelectedComedian("DaveChapelle")}>
+                            <img src="/davechapelle-thumbnail.jpg" alt="Dave Chapelle" />
+                            <p>Dave Chappelle</p>
+                        </div>
+                        <div className="thumbnail" onClick={() => setSelectedComedian("Kharlamov")}>
+                            <img src="/kharlamov-thumbnail.jpg" alt="Kharlamov" />
+                            <p>Garik Kharlamov</p>
+                        </div>
+                        <div className="thumbnail" onClick={() => setSelectedComedian("Saburov")}>
+                            <img src="/saburov-thumbnail.jpg" alt="Saburov" />
+                            <p>Nurlan Saburov</p>
+                        </div>
                     </div>
-                    <div className="thumbnail" onClick={() => setSelectedComedian("Kharlamov")}>
-                        <img src="/kharlamov-thumbnail.jpg" alt="Kharlamov" />
-                        <p>Garik Kharlamov</p>
+                    <div className="canvas-container">
+                        <Canvas
+                            shadows
+                            camera={{ position: [0, 0, -10], fov: 17 }}
+                            onCreated={({ camera }) => {
+                                camera.lookAt(0, 0, 0);
+                                camera.updateProjectionMatrix();
+                            }}
+                            style={{ pointerEvents: 'none' }}
+                        >
+                            <Scenario selectedComedian={selectedComedian} />
+                        </Canvas>
                     </div>
-                    <div className="thumbnail" onClick={() => setSelectedComedian("Saburov")}>
-                        <img src="/saburov-thumbnail.jpg" alt="Saburov" />
-                        <p>Nurlan Saburov</p>
-                    </div>
-                </div>
-                <div className="canvas-container">
-                    <Canvas
-                        shadows
-                        camera={{ position: [0, 0, -10], fov: 17 }}
-                        onCreated={({ camera }) => {
-                            camera.lookAt(0, 0, 0);
-                            camera.updateProjectionMatrix();
-                        }}
-                        style={{ pointerEvents: 'none' }}
-                    >
-                        <Scenario selectedComedian={selectedComedian} />
-                    </Canvas>
-                </div>
-            </ErrorBoundary>
-        </div>
+                </ErrorBoundary>
+            </div>
+        </SpeechProvider>
     );
 }
 
