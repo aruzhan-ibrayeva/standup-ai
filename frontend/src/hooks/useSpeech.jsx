@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const backendUrl = "standup-ai.railway.internal";
+const backendUrl = "https://standup-ai-back.onrender.com";
 
 const SpeechContext = createContext();
 
