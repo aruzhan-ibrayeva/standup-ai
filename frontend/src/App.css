@@ -1,6 +1,5 @@
 .app-container {
     display: flex;
-    flex-direction: column;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -49,25 +48,32 @@
 }
 
 .chat-interface-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    height: auto;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start;
+    justify-content: flex-end;
     pointer-events: none;
+    padding: 20px;
 }
 
 .chat-interface-container > div {
     pointer-events: auto;
+    max-width: 300px;
 }
 
-/* Hide text container on mobile */
 @media (max-width: 768px) {
+    .chat-interface-container {
+        top: 20px;
+        right: 20px;
+        width: calc(100% - 40px);
+    }
+
     .chat-interface-container > div {
-        display: none;
+        max-width: calc(100% - 60px); /* Adjust the width to avoid sidebar overlap */
     }
 
     .app-container {
@@ -75,12 +81,13 @@
     }
 
     .sidebar {
-        position: static;
+        position: absolute;
+        left: 20px;
+        top: 20px;
+        z-index: 10;
         display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        width: 100%;
-        padding: 10px;
+        flex-direction: column;
+        gap: 20px;
     }
 
     .thumbnail {
@@ -92,10 +99,13 @@
         height: 60px;
     }
 
-    .canvas-container {
-        flex-grow: 1;
-        height: 70vh;
-    }
 }
 
-
+@media (min-width: 769px) {
+    .chat-interface-container {
+        top: 20px;
+        right: 20px;
+        width: auto;
+        height: auto;
+    }
+}

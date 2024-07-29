@@ -35,8 +35,8 @@ export const ChatInterface = ({ hidden, selectedComedian, ...props }) => {
     const comedianText = comedianTexts[selectedComedian] || comedianTexts.DaveChapelle;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 top-20 z-10 flex flex-col justify-between p-4 pointer-events-none">
-            <div className="self-end flex flex-col items-end backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto mr-4 w-full sm:w-1/3 mt-10">
+        <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
+            <div className="self-end flex flex-col items-end backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto mr-4 w-full sm:w-1/3">
                 <h1 className="font-black text-xl text-gray-700">{comedianText.title}</h1>
                 <p className="text-gray-700">
                     {loading ? "Loading..." : comedianText.prompt}
