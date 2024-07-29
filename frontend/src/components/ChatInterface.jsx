@@ -1,7 +1,22 @@
 import { useRef } from "react";
 import { useSpeech } from "../hooks/useSpeech";
 
-export const ChatInterface = ({ hidden, ...props }) => {
+const comedianTexts = {
+    DaveChapelle: {
+        title: "Dave Chappelle's Laugh Lounge!",
+        prompt: "Need a laugh? Give me a topic! Just a heads up, my humor can be brutally honest or deliciously dark!"
+    },
+    Kharlamov: {
+        title: "Комедийный клуб Гарика Харламова!",
+        prompt: "Готовы смеяться до слез? Назовите тему! Мой юмор бывает резким, неожиданным и всегда смешным!"
+    },
+    Saburov: {
+        title: "Добро пожаловать на шоу Нурлана Сабурова",
+        prompt: "Задай тему! Только предупреждаю, мой юмор может быть острым, саркастичным и полным культурных тонкостей!"
+    }
+};
+
+export const ChatInterface = ({ hidden, selectedComedian, ...props }) => {
     const input = useRef();
     const { tts, loading, message, startRecording, stopRecording, recording } = useSpeech();
 
@@ -12,16 +27,19 @@ export const ChatInterface = ({ hidden, ...props }) => {
             input.current.value = "";
         }
     };
+
     if (hidden) {
         return null;
     }
 
+    const comedianText = comedianTexts[selectedComedian] || comedianTexts.DaveChapelle;
+
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
             <div className="self-end flex flex-col items-end backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto mr-4 w-1/3">
-                <h1 className="font-black text-xl text-gray-700">Dave Chappelle's Laugh Lounge!</h1>
+                <h1 className="font-black text-xl text-gray-700">{comedianText.title}</h1>
                 <p className="text-gray-700">
-                    {loading ? "Loading..." : "Need a laugh? Give me a topic! Just a heads up, my humor can be brutally honest or deliciously dark!"}
+                    {loading ? "Loading..." : comedianText.prompt}
                 </p>
             </div>
             <div className="flex items-center gap-2 pointer-events-auto max-w-screen-sm w-full mx-auto">

@@ -10,7 +10,7 @@ export const SpeechProvider = ({ children }) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState();
     const [loading, setLoading] = useState(false);
-    const [comedian, setComedian] = useState("Saburov"); // default comedian
+    const [comedian, setComedian] = useState("Saburov");
 
     let chunks = [];
 

@@ -15,7 +15,7 @@ function App() {
         <SpeechProvider>
             <div className="app-container">
                 <Loader />
-                <ChatInterface />
+                <ChatInterface selectedComedian={selectedComedian} />
                 <ErrorBoundary>
                     <div className="sidebar">
                         <div className="thumbnail" onClick={() => setSelectedComedian("DaveChapelle")}>
