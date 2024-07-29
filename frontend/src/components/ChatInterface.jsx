@@ -3,16 +3,16 @@ import { useSpeech } from "../hooks/useSpeech";
 
 const comedianTexts = {
     DaveChapelle: {
-        title: "Dave Chappelle's Laugh Lounge!",
-        prompt: "Need a laugh? Give me a topic! Just a heads up, my humor can be brutally honest or deliciously dark!"
+        title: "Dave Chappelle",
+        prompt: "Need a laugh? Give me a topic! Just a heads up, my humor can be brutally honest or dark!"
     },
     Kharlamov: {
-        title: "Комедийный клуб Гарика Харламова!",
-        prompt: "Готовы смеяться до слез? Назовите тему! Мой юмор бывает резким, неожиданным и всегда смешным!"
+        title: "Гарик Харламов",
+        prompt: "Готовы смеяться до слез? Назовите тему! Мой юмор резкий и неожиданнный!"
     },
     Saburov: {
-        title: "Добро пожаловать на шоу Нурлана Сабурова",
-        prompt: "Задай тему! Только предупреждаю, мой юмор может быть острым, саркастичным и полным культурных тонкостей!"
+        title: "Нурлан Сабуров",
+        prompt: "Задай тему! Мой юмор может быть острым, саркастичным и культурным!"
     }
 };
 
@@ -35,8 +35,8 @@ export const ChatInterface = ({ hidden, selectedComedian, ...props }) => {
     const comedianText = comedianTexts[selectedComedian] || comedianTexts.DaveChapelle;
 
     return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
-            <div className="self-end flex flex-col items-end backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto mr-4 w-1/3">
+        <div className="fixed bottom-0 left-0 right-0 top-20 z-10 flex flex-col justify-between p-4 pointer-events-none">
+            <div className="self-end flex flex-col items-end backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto mr-4 w-full sm:w-1/3 mt-10">
                 <h1 className="font-black text-xl text-gray-700">{comedianText.title}</h1>
                 <p className="text-gray-700">
                     {loading ? "Loading..." : comedianText.prompt}

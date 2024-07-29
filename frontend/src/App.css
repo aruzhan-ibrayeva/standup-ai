@@ -1,6 +1,6 @@
 .app-container {
     display: flex;
-    position: relative;
+    flex-direction: column;
     height: 100vh;
     width: 100vw;
     overflow: hidden;
@@ -63,3 +63,39 @@
 .chat-interface-container > div {
     pointer-events: auto;
 }
+
+/* Hide text container on mobile */
+@media (max-width: 768px) {
+    .chat-interface-container > div {
+        display: none;
+    }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: static;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .thumbnail {
+        width: 70px;
+    }
+
+    .thumbnail img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .canvas-container {
+        flex-grow: 1;
+        height: 70vh;
+    }
+}
+
+
