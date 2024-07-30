@@ -7,11 +7,13 @@ import { ChatInterface } from "./components/ChatInterface";
 import ErrorBoundary from "./ErrorBoundary";
 import './App.css';
 import { SpeechProvider } from "./hooks/useSpeech";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
     const [selectedComedian, setSelectedComedian] = useState("DaveChapelle");
 
     return (
+        <>
         <SpeechProvider>
             <div className="app-container flex flex-col md:flex-row">
                 <Loader />
@@ -47,6 +49,8 @@ function App() {
                 </ErrorBoundary>
             </div>
         </SpeechProvider>
+        <Analytics />
+        </>
     );
 }
 
