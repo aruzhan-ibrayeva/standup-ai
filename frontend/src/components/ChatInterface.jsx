@@ -1,10 +1,11 @@
 import { useRef } from "react";
 import { useSpeech } from "../hooks/useSpeech";
+import "../App.css";
 
 const comedianTexts = {
     DaveChapelle: {
         title: "Dave Chappelle",
-        prompt: "Need a laugh? Give me a topic! Just a heads up, my humor can be brutally honest or dark!"
+        prompt: "Give me a topic! Just a heads up, my humor can be brutally honest and dark!"
     },
     Kharlamov: {
         title: "Гарик Харламов",
@@ -12,7 +13,7 @@ const comedianTexts = {
     },
     Saburov: {
         title: "Нурлан Сабуров",
-        prompt: "Задай тему! Мой юмор может быть острым, саркастичным и культурным!"
+        prompt: "Задай тему! Но будь готов к жестким шуткам... Хотя в любом случае ты не сможешь меня захейтить, ибо я Искусственнный Интеллект))"
     }
 };
 
@@ -34,11 +35,11 @@ export const ChatInterface = ({ hidden, selectedComedian, ...props }) => {
 
     const comedianText = comedianTexts[selectedComedian] || comedianTexts.DaveChapelle;
 
-    return (
-        <div className="fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col justify-between p-4 pointer-events-none">
-            <div className="self-end flex flex-col items-end backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto mr-4 w-full sm:w-1/3">
+    return  (
+        <div className="chat-interface-container fixed top-0 left-0 right-0 bottom-0 z-10 flex flex-col items-center justify-between p-2 pointer-events-none">
+            <div className="message-container flex flex-col items-center backdrop-blur-md bg-white bg-opacity-50 p-4 rounded-lg mb-auto w-full sm:w-1/3">
                 <h1 className="font-black text-xl text-gray-700">{comedianText.title}</h1>
-                <p className="text-gray-700">
+                <p className="text-gray-700 text-center md:text-left">
                     {loading ? "Loading..." : comedianText.prompt}
                 </p>
             </div>

@@ -25,7 +25,7 @@ export const Scenario = ({ selectedComedian }) => {
     const renderComedian = () => {
         switch (selectedComedian) {
             case "DaveChapelle":
-                return <DaveChapelle position={[0, 1.6, 0.8]} />;
+                return <DaveChapelle position={[0, 1.5, 0.3]} />;
             case "Kharlamov":
                 return <Kharlamov position={[0, 1.5, 0.5]} />;
             case "Saburov":

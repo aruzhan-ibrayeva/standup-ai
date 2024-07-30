@@ -21,7 +21,7 @@ app.get("/voices", async (req, res) => {
 
 app.post("/tts", async (req, res) => {
     const { message, comedian } = req.body;
-    console.log("Received TTS request with comedian:", comedian); // Debug log
+    console.log("Received TTS request with comedian:", comedian);
     const defaultMessages = await sendDefaultMessages({ userMessage: message });
     if (defaultMessages) {
         res.send({ messages: defaultMessages });

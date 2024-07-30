@@ -13,11 +13,11 @@ function App() {
 
     return (
         <SpeechProvider>
-            <div className="app-container">
+            <div className="app-container flex flex-col md:flex-row">
                 <Loader />
                 <ChatInterface selectedComedian={selectedComedian} />
                 <ErrorBoundary>
-                    <div className="sidebar">
+                    <div className="sidebar flex flex-col">
                         <div className="thumbnail" onClick={() => setSelectedComedian("DaveChapelle")}>
                             <img src="/davechapelle-thumbnail.jpg" alt="Dave Chapelle" />
                             <p>Dave Chappelle</p>
