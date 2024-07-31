@@ -6,16 +6,19 @@ import { Kharlamov } from "./Kharlamov";
 import { Saburov } from "./Saburov";
 import { useSpeech } from "../hooks/useSpeech";
 import { ChatInterface } from "./ChatInterface";
+import * as THREE from "three";
 
 export const Scenario = ({ selectedComedian }) => {
     const { setComedian } = useSpeech();
-    
+
     useEffect(() => {
         setComedian(selectedComedian);
     }, [selectedComedian, setComedian]);
 
     const texture = useTexture(`textures/${selectedComedian.toLowerCase()}.jpg`);
-    const viewport = useThree((state) => state.viewport);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(1, 1); // Set this to 1, 1 for no repeating
 
     const cameraControls = useRef();
     useEffect(() => {
@@ -25,11 +28,11 @@ export const Scenario = ({ selectedComedian }) => {
     const renderComedian = () => {
         switch (selectedComedian) {
             case "DaveChapelle":
-                return <DaveChapelle position={[0, 1.5, 0.3]} />;
+                return <DaveChapelle position={[0, 1.56, 0]} />;
             case "Kharlamov":
-                return <Kharlamov position={[0, 1.5, 0.5]} />;
+                return <Kharlamov position={[0, 1.59, -1]} />;
             case "Saburov":
-                return <Saburov position={[0, 1.45, -2]} />;
+                return <Saburov position={[0, 1.6, -2.5]} />;
             default:
                 return null;
         }
@@ -40,8 +43,8 @@ export const Scenario = ({ selectedComedian }) => {
             <CameraControls ref={cameraControls} />
             {renderComedian()}
             <Environment preset="sunset" />
-            <mesh position={[0, 2.5, -7]}>
-                <planeGeometry args={[viewport.width * 1.7, viewport.height * 1.7]} />
+            <mesh position={[0, 3.0, -8]}>
+                <planeGeometry args={[15, 6]} />
                 <meshBasicMaterial map={texture} />
             </mesh>
             <Html position={[0, 0, 0]} className="chat-interface-container">

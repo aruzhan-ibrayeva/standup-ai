@@ -41,7 +41,7 @@ function App() {
                                     camera.lookAt(0, 0, 0);
                                     camera.updateProjectionMatrix();
                                 }}
-                                style={{ pointerEvents: 'none' }}
+                                style={{ pointerEvents: 'none', position: "absolute" }}
                             >
                                 <Scenario selectedComedian={selectedComedian} />
                             </Canvas>
