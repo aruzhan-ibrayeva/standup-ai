@@ -15,7 +15,7 @@ const getPhonemes = async ({ message }) => {
         });
         console.log(`Conversion done in ${new Date().getTime() - time}ms`);
 
-        const rhubarbPath = 'D:\\ARUZHAN\\NFACTORIAL24\\talking-avatar-with-ai\\apps\\backend\\bin\\rhubarb\\rhubarb.exe';
+        const rhubarbPath = 'rhubarb';
         const audioFilePath = join(__dirname, '../audios', `message_${message}.wav`);
         const outputFilePath = join(__dirname, '../audios', `message_${message}.json`);
         

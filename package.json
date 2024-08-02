@@ -8,8 +8,8 @@
         "apps/*"
     ],
     "scripts": {
-        "client": "npm --prefix apps/frontend run dev",
-        "server": "npm --prefix apps/backend run dev",
+        "client": "npm --prefix frontend run dev",
+        "server": "npm --prefix backend run dev",
         "dev": "npm-run-all --parallel client server"
     },
     "devDependencies": {
