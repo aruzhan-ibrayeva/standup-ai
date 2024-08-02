@@ -1,3 +1,4 @@
+// App.jsx
 import { useState } from "react";
 import { Loader } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
@@ -13,44 +14,42 @@ function App() {
     const [selectedComedian, setSelectedComedian] = useState("DaveChapelle");
 
     return (
-        <>
-            <SpeechProvider>
-                <div className="app-container flex flex-col md:flex-row">
-                    <Loader />
-                    <ChatInterface selectedComedian={selectedComedian} />
-                    <ErrorBoundary>
-                        <div className="sidebar flex flex-col">
-                            <div className="thumbnail" onClick={() => setSelectedComedian("DaveChapelle")}>
-                                <img src="/davechapelle-thumbnail.jpg" alt="Dave Chapelle" />
-                                <p>Dave Chappelle</p>
-                            </div>
-                            <div className="thumbnail" onClick={() => setSelectedComedian("Kharlamov")}>
-                                <img src="/kharlamov-thumbnail.jpg" alt="Kharlamov" />
-                                <p>Garik Kharlamov</p>
-                            </div>
-                            <div className="thumbnail" onClick={() => setSelectedComedian("Saburov")}>
-                                <img src="/saburov-thumbnail.jpg" alt="Saburov" />
-                                <p>Nurlan Saburov</p>
-                            </div>
+        <SpeechProvider>
+            <div className="app-container flex flex-col md:flex-row">
+                <Loader />
+                <ChatInterface selectedComedian={selectedComedian} />
+                <ErrorBoundary>
+                    <div className="sidebar flex flex-col">
+                        <div className="thumbnail" onClick={() => setSelectedComedian("DaveChapelle")}>
+                            <img src="/davechapelle-thumbnail.jpg" alt="Dave Chapelle" />
+                            <p>Dave Chappelle</p>
                         </div>
-                        <div className="canvas-container">
-                            <Canvas
-                                shadows
-                                camera={{ position: [0, 0, -10], fov: 17 }}
-                                onCreated={({ camera }) => {
-                                    camera.lookAt(0, 0, 0);
-                                    camera.updateProjectionMatrix();
-                                }}
-                                style={{ pointerEvents: 'none', position: "absolute" }}
-                            >
-                                <Scenario selectedComedian={selectedComedian} />
-                            </Canvas>
+                        <div className="thumbnail" onClick={() => setSelectedComedian("Kharlamov")}>
+                            <img src="/kharlamov-thumbnail.jpg" alt="Kharlamov" />
+                            <p>Garik Kharlamov</p>
                         </div>
-                    </ErrorBoundary>
-                </div>
-            </SpeechProvider>
+                        <div className="thumbnail" onClick={() => setSelectedComedian("Saburov")}>
+                            <img src="/saburov-thumbnail.jpg" alt="Saburov" />
+                            <p>Nurlan Saburov</p>
+                        </div>
+                    </div>
+                    <div className="canvas-container">
+                        <Canvas
+                            shadows
+                            camera={{ position: [0, 0, -10], fov: 17 }}
+                            onCreated={({ camera }) => {
+                                camera.lookAt(0, 0, 0);
+                                camera.updateProjectionMatrix();
+                            }}
+                            style={{ pointerEvents: 'none', position: "absolute" }}
+                        >
+                            <Scenario selectedComedian={selectedComedian} />
+                        </Canvas>
+                    </div>
+                </ErrorBoundary>
+            </div>
             <Analytics />
-        </>
+        </SpeechProvider>
     );
 }
 

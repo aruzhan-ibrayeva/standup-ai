@@ -29,14 +29,14 @@ app.post("/tts", async (req, res) => {
     }
     let openAImessages;
     try {
-        openAImessages = await openAIChain.invoke({
+        openAImessages = await openAIChain(comedian).invoke({
             question: message,
             format_instructions: parser.getFormatInstructions(),
         });
     } catch (error) {
         openAImessages = defaultResponse;
     }
-    console.log("openAImessages:", openAImessages); // Debug log
+    console.log("openAImessages:", openAImessages); 
 
     openAImessages = await lipSync({ messages: openAImessages.messages, comedian });
 
@@ -45,19 +45,19 @@ app.post("/tts", async (req, res) => {
 
 app.post("/sts", async (req, res) => {
     const { audio, comedian } = req.body;
-    console.log("Received STS request with comedian:", comedian); // Debug log
+    console.log("Received STS request with comedian:", comedian); 
     const audioData = Buffer.from(audio, "base64");
     const userMessage = await convertAudioToText({ audioData });
     let openAImessages;
     try {
-        openAImessages = await openAIChain.invoke({
+        openAImessages = await openAIChain(comedian).invoke({
             question: userMessage,
             format_instructions: parser.getFormatInstructions(),
         });
     } catch (error) {
         openAImessages = defaultResponse;
     }
-    console.log("openAImessages:", openAImessages); // Debug log
+    console.log("openAImessages:", openAImessages); 
 
     openAImessages = await lipSync({ messages: openAImessages.messages, comedian });
 

@@ -15,6 +15,7 @@ const readJsonTranscript = async ({ fileName }) => {
     return JSON.parse(data);
 };
 
+
 const audioFileToBase64 = async ({ fileName }) => {
     const data = await fs.readFile(fileName);
     return data.toString("base64");

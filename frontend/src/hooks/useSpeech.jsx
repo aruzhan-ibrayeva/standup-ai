@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
 const backendUrl = "https://standup-ai-back.onrender.com";
+//const backendUrl = "http://localhost:3000";
 
 const SpeechContext = createContext();
 
@@ -10,7 +11,7 @@ export const SpeechProvider = ({ children }) => {
     const [messages, setMessages] = useState([]);
     const [message, setMessage] = useState();
     const [loading, setLoading] = useState(false);
-    const [comedian, setComedian] = useState("Saburov");
+    const [comedian, setComedian] = useState("DaveChapelle");
 
     let chunks = [];
 
@@ -29,7 +30,7 @@ export const SpeechProvider = ({ children }) => {
             const base64Audio = reader.result.split(",")[1];
             setLoading(true);
             try {
-                console.log("Sending STS request with comedian:", comedian); // Debug log
+                console.log("Sending STS request with comedian:", comedian);
                 const data = await fetch(`${backendUrl}/sts`, {
                     method: "POST",
                     headers: {
@@ -49,6 +50,7 @@ export const SpeechProvider = ({ children }) => {
 
     useEffect(() => {
         if (typeof window !== "undefined") {
+
             navigator.mediaDevices
                 .getUserMedia({ audio: true })
                 .then((stream) => {
@@ -87,7 +89,7 @@ export const SpeechProvider = ({ children }) => {
     const tts = async (message) => {
         setLoading(true);
         try {
-            console.log("Sending TTS request with comedian:", comedian); // Debug log
+            console.log("Sending TTS request with comedian:", comedian);
             const data = await fetch(`${backendUrl}/tts`, {
                 method: "POST",
                 headers: {
@@ -126,7 +128,8 @@ export const SpeechProvider = ({ children }) => {
                 message,
                 onMessagePlayed,
                 loading,
-                setComedian, 
+                setComedian,
+                setMessage
             }}
         >
             {children}

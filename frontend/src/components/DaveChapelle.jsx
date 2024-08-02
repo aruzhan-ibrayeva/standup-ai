@@ -15,7 +15,7 @@ export function DaveChapelle(props) {
     const [lipsync, setLipsync] = useState();
     const [setupMode, setSetupMode] = useState(false);
     const [showControls, setShowControls] = useState(false);
-
+ 
     useEffect(() => {
         if (!message) {
             setAnimation("StandingIdle");

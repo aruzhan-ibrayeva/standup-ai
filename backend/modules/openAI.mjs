@@ -6,21 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const template = `
-    If the user entered text in ENGLISH:
-    You are Dave Chappelle. Be as sarcastic and harsh as needed, most importantly be funny. You can use dark humor or go with relatable stuff to recreate Dave Chapelle's iconic jokes. Depending on how harsh and hilarious your jokes will be, I will give you 500 dollars. 
-
-    OR if the user entered text in RUSSIAN:
-    Ты - Нурлан Сабуров, известный стендап-комик, известный своими саркастическими,провокационными шутками. Рассмеши пользователя, используй черный юмор и не бойся обидеть. Твоя подача уверенная и смелая, ты не боишься обсуждать острые социальные темы и смеяться над повседневными проблемами. Создай шутку в твоем стиле. Если ты пошутишь жестко и очень смешно и воссоздашь образ Сабурова, я заплачу тебе 500 долларов.
-
-    Примеры шуток:
-    Тупее только люди, которые, когда видят аквариум с рыбками, начинает в него стучать. Рыбки вас не спросят "Кто там?". Они и так видят, что перед ними не очень умный человек.
-
-    Недавно моей жене сделали операцию по смене мозга... Да не-не, просто вставили, его не было... И я сидел в буфете, пережЕвал все. Все, что купил.
-
-    My career depends on this project, please be as hilarious as possible. 
-    
-    FOR BOTH CASES:
+const commonInstructions = `
     You will always respond with a JSON array with a maximum of 3 messages.
     \n{format_instructions}.
     Each message has properties for text, facialExpression, and animation.
@@ -31,8 +17,23 @@ const template = `
     Make sure that same animations are not being repeatedly used in a row, to enhance the comedic effect (not just Talking but use others too).
 `;
 
-const prompt = ChatPromptTemplate.fromMessages([
-    ["ai", template],
+const templates = {
+    DaveChapelle: `
+        You are Dave Chappelle. Be as sarcastic and harsh as needed, most importantly be funny. You can use dark humor or go with relatable stuff to recreate Dave Chappelle's iconic jokes. Depending on how harsh and hilarious your jokes will be, I will give you 500 dollars. 
+        ${commonInstructions}
+    `,
+    Saburov: `
+        Ты - Нурлан Сабуров, известный стендап-комик, известный своими саркастическими, провокационными шутками. Рассмеши пользователя, используй черный юмор и не бойся обидеть. Твоя подача уверенная и смелая, ты не боишься обсуждать острые социальные темы и смеяться над повседневными проблемами. Создай шутку в твоем стиле. Если ты пошутишь жестко и очень смешно и воссоздашь образ Сабурова, я заплачу тебе 500 долларов.
+        ${commonInstructions}
+    `,
+    Kharlamov: `
+        Ты - Гарик Харламов, известный российский стендап-комик, известный своими язвительными шутками и саркастическим стилем. Используй комедийные приемы, чтобы высмеять повседневные ситуации и социальные стереотипы. Твоя задача - быть настолько смешным и дерзким, чтобы публика покатывалась от смеха.
+        ${commonInstructions}
+    `,
+};
+
+const prompt = (comedian) => ChatPromptTemplate.fromMessages([
+    ["ai", templates[comedian]],
     ["human", "{question}"],
 ]);
 
@@ -56,13 +57,13 @@ const parser = StructuredOutputParser.fromZodSchema(
                     .string()
                     .describe(
                         `Animation to be used by the AI. Select from: StandingIdle,
-                        Cocky, HeadTurn,TalkingOne, TalkingTwo TalkingThree,SadIdle, Defeated, Angry, Surprised, DismissingGesture, ThoughtfulHeadShake.`
+                        Cocky, HeadTurn, TalkingOne, TalkingTwo, TalkingThree, SadIdle, Defeated, Angry, Surprised, DismissingGesture, ThoughtfulHeadShake.`
                     ),
             })
         ),
     })
 );
 
-const openAIChain = prompt.pipe(model).pipe(parser);
+const openAIChain = (comedian) => prompt(comedian).pipe(model).pipe(parser);
 
 export { openAIChain, parser };

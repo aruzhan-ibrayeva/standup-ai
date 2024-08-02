@@ -1,3 +1,4 @@
+// Scenario.jsx
 import { CameraControls, Environment, useTexture, Html } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
 import { useEffect, useRef } from "react";
@@ -18,7 +19,7 @@ export const Scenario = ({ selectedComedian }) => {
     const texture = useTexture(`textures/${selectedComedian.toLowerCase()}.jpg`);
     texture.wrapS = THREE.RepeatWrapping;
     texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(1, 1); // Set this to 1, 1 for no repeating
+    texture.repeat.set(1, 1);
 
     const cameraControls = useRef();
     useEffect(() => {
