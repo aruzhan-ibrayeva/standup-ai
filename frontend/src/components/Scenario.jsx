@@ -23,7 +23,7 @@ export const Scenario = ({ selectedComedian }) => {
 
     const cameraControls = useRef();
     useEffect(() => {
-        cameraControls.current.setLookAt(0, 2.5, 10, 0, 2.5, 0, true);
+        cameraControls.current.setLookAt(0, 2.2, 10, 0, 2.5, 0, true);
     }, []);
 
     const renderComedian = () => {
